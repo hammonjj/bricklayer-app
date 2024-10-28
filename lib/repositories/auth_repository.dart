@@ -1,4 +1,4 @@
-import 'package:bricklayer/repositories/dtos/user_dto.dart';
+import 'package:bricklayer/repositories/dtos/auth_dto.dart';
 import 'package:bricklayer/repositories/models/user_login_model.dart';
 
 import '../services/api_client.dart';
@@ -9,7 +9,7 @@ class AuthRepository {
 
   AuthRepository({required this.apiClient});
 
-  Future<UserDto?> signUp({required String email, required String password}) async {
+  Future<AuthDto?> signUp({required String email, required String password}) async {
     try {
       final response = await apiClient.post(
         '/signup',
@@ -20,7 +20,7 @@ class AuthRepository {
       if (response.statusCode == 200) {
         final user = UserRegistrationModel.fromJson(response.data);
 
-        return UserDto(
+        return AuthDto(
           userId: user.userId,
           username: user.username,
           accessToken: user.accessToken,
@@ -34,7 +34,7 @@ class AuthRepository {
     }
   }
 
-  Future<UserDto?> login({required String email, required String password}) async {
+  Future<AuthDto?> login({required String email, required String password}) async {
     try {
       final response = await apiClient.post(
         '/login',
@@ -45,7 +45,7 @@ class AuthRepository {
       if (response.statusCode == 200) {
         final user = UserLoginModel.fromJson(response.data);
 
-        return UserDto(
+        return AuthDto(
           userId: user.userId,
           username: email,
           accessToken: user.accessToken,

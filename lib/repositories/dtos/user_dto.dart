@@ -1,13 +1,8 @@
-class UserDto {
-  final String userId;
-  final String username;
-  final String accessToken;
-  final String refreshToken;
+import 'package:bricklayer/core/utils/guid.dart';
 
-  UserDto({
-    required this.userId,
-    required this.username,
-    required this.accessToken,
-    required this.refreshToken,
-  });
+class UserDto {
+  final Guid userId;
+  final String username;
+
+  UserDto({required this.userId, required this.username});
 }

@@ -1,10 +1,14 @@
+import 'package:bricklayer/core/utils/guid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppSettings {
   static const _serverUrlKey = 'serverUrl';
+
   static const _tokenKey = 'auth.token';
   static const _tokenRefreshKey = 'auth.refreshToken';
   static const _tokenExpirationKey = 'auth.tokenExpiration';
+
+  static const _userIdKey = 'user.id';
   static const _usernameKey = 'user.username';
   static const _passwordKey = 'user.password';
   static const _rememberMeKey = 'user.rememberMe';
@@ -31,8 +35,21 @@ class AppSettings {
     return _prefs.getString(_serverUrlKey);
   }
 
-  Future<void> setUsername(String username) async {
+  Future<void> setUsername(String? username) async {
+    if (username == null) {
+      await _prefs.remove(_usernameKey);
+      return;
+    }
+
     await _prefs.setString(_usernameKey, username);
+  }
+
+  Future<void> setUserId(Guid userId) async {
+    await _prefs.setString(_userIdKey, userId.toString());
+  }
+
+  Guid getUserId() {
+    return Guid.parse(_prefs.getString(_userIdKey)!);
   }
 
   String? getUsername() {
