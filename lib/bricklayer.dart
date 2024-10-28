@@ -1,9 +1,8 @@
 import 'package:bricklayer/blocs/auth/auth_bloc.dart';
 import 'package:bricklayer/core/enums.dart';
-import 'package:bricklayer/features/auth/registration_screen.dart';
 import 'package:bricklayer/features/home/screens/home_screen.dart';
+import 'package:bricklayer/features/login/auth_screen.dart';
 import 'package:bricklayer/features/login/bloc/login_bloc.dart';
-import 'package:bricklayer/features/login/login_screen.dart';
 import 'package:bricklayer/features/settings/screens/settings_landing_screen.dart';
 import 'package:bricklayer/features/splash/splash_screen.dart';
 import 'package:bricklayer/repositories/auth_repository.dart';
@@ -52,17 +51,13 @@ class BricklayerState extends State<Bricklayer> {
           builder: (context, state) => const HomeScreen(),
         ),
         GoRoute(
-          path: '/registration',
-          builder: (context, state) => const RegistrationScreen(),
-        ),
-        GoRoute(
-          path: '/login',
+          path: '/auth',
           builder: (context, state) {
             return BlocProvider(
               create: (_) => LoginBloc(
                 authenticationRepository: GetIt.instance.get<AuthRepository>(),
               ),
-              child: const LoginScreen(),
+              child: const AuthScreen(),
             );
           },
         ),
@@ -114,11 +109,11 @@ class _BrickLayerViewState extends State<BrickLayerView> {
             if (state.status == AuthenticationStatus.authenticated) {
               context.go('/home');
             } else if (state.status == AuthenticationStatus.unauthenticated) {
-              context.go('/login');
+              context.go('/auth');
             } else if (state.status == AuthenticationStatus.unknown) {
-              context.go('/registration');
+              context.go('/auth');
             } else if (state.status == AuthenticationStatus.authenticationFailed) {
-              context.go('/login');
+              context.go('/auth');
             }
           },
           child: child!,

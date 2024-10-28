@@ -15,7 +15,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         super(const LoginState()) {
     on<LoginUsernameChanged>(_onUsernameChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
-    on<LoginSubmitted>(_onSubmitted);
+    on<LoginSubmitted>(_onLoginSubmitted);
+    on<RegistrationSubmitted>(_onRegistrationSubmitted);
   }
 
   final AuthRepository _authenticationRepository;
@@ -43,7 +44,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
   }
 
-  Future<void> _onSubmitted(
+  Future<void> _onLoginSubmitted(
     LoginSubmitted event,
     Emitter<LoginState> emit,
   ) async {
@@ -51,6 +52,25 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
       try {
         await _authenticationRepository.login(
+          email: state.username.value,
+          password: state.password.value,
+        );
+
+        emit(state.copyWith(status: FormzSubmissionStatus.success));
+      } catch (_) {
+        emit(state.copyWith(status: FormzSubmissionStatus.failure));
+      }
+    }
+  }
+
+  Future<void> _onRegistrationSubmitted(
+    RegistrationSubmitted event,
+    Emitter<LoginState> emit,
+  ) async {
+    if (state.isValid) {
+      emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+      try {
+        await _authenticationRepository.signUp(
           email: state.username.value,
           password: state.password.value,
         );
