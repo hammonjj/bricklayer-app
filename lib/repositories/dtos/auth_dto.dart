@@ -1,5 +1,7 @@
+import 'package:bricklayer/core/utils/guid.dart';
+
 class AuthDto {
-  final String userId;
+  final Guid userId;
   final String username;
   final String accessToken;
   final String refreshToken;

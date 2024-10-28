@@ -1,4 +1,5 @@
 import 'package:bricklayer/repositories/auth_repository.dart';
+import 'package:bricklayer/repositories/dtos/auth_dto.dart';
 import 'package:bricklayer/repositories/dtos/user_dto.dart';
 import 'package:bricklayer/services/app_settings.dart';
 import 'package:flutter/foundation.dart';
@@ -18,7 +19,8 @@ class AuthNotifier extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final authUser = await authRepository.signUp(email: email, password: password);
+      final authUser =
+          await authRepository.signUp(email: email, password: password);
       if (authUser != null) {
         await _storeUserCredentials(authUser);
         _state = AuthState.success(user: authUser);
@@ -51,8 +53,7 @@ class AuthNotifier extends ChangeNotifier {
     }
   }
 
-  Future<void> _storeUserCredentials(UserDto user) async {
-    await appSettings.setUsername(user.username);
+  Future<void> _storeUserCredentials(AuthDto user) async {
     await appSettings.setToken(user.accessToken);
     await appSettings.setRefreshToken(user.refreshToken);
   }
