@@ -6,7 +6,7 @@ class UserRepository {
 
   UserRepository({required AppSettings appSettings}) : _appSettings = appSettings;
 
-  Future<UserDto?> getCurrentUser() async {
+  UserDto? getCurrentUser() {
     final username = _appSettings.getUsername();
     if (username == null) {
       return null;
@@ -14,7 +14,7 @@ class UserRepository {
 
     final id = _appSettings.getUserId();
 
-    return UserDto(userId: id, username: username);
+    return UserDto(id: id, username: username);
   }
 
   Future<void> setCurrentUser(UserDto? user) async {
@@ -24,6 +24,6 @@ class UserRepository {
     }
 
     await _appSettings.setUsername(user.username);
-    await _appSettings.setUserId(user.userId);
+    await _appSettings.setUserId(user.id);
   }
 }

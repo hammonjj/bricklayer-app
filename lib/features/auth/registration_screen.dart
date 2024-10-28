@@ -1,4 +1,3 @@
-import 'package:bricklayer/providers/auth/auth_notifier.dart';
 import 'package:bricklayer/repositories/dtos/user_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -16,40 +15,40 @@ class RegistrationScreenState extends State<RegistrationScreen> {
   String? _email;
   String? _password;
 
-  void _sendRegistrationEvent() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
+  // void _sendRegistrationEvent() {
+  //   if (_formKey.currentState!.validate()) {
+  //     _formKey.currentState!.save();
 
-      Provider.of<AuthNotifier>(context, listen: false).signUp(_email!, _password!);
-    }
-  }
+  //     Provider.of<AuthNotifier>(context, listen: false).signUp(_email!, _password!);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final authState = context.watch<AuthNotifier>().state;
+    // final authState = context.watch<AuthNotifier>().state;
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      authState.when(
-        initial: () {},
-        loading: () {},
-        success: (UserDto user) {
-          context.go('/');
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Registration successful')),
-          );
-        },
-        failure: (error) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Registration failed: $error')),
-          );
-        },
-      );
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   authState.when(
+    //     initial: () {},
+    //     loading: () {},
+    //     success: (UserDto user) {
+    //       context.go('/');
+    //       ScaffoldMessenger.of(context).showSnackBar(
+    //         const SnackBar(content: Text('Registration successful')),
+    //       );
+    //     },
+    //     failure: (error) {
+    //       ScaffoldMessenger.of(context).showSnackBar(
+    //         SnackBar(content: Text('Registration failed: $error')),
+    //       );
+    //     },
+    //   );
+    // });
 
-    final isLoading = authState.maybeWhen(
-      loading: () => true,
-      orElse: () => false,
-    );
+    // final isLoading = authState.maybeWhen(
+    //   loading: () => true,
+    //   orElse: () => false,
+    // );
 
     return Scaffold(
       appBar: AppBar(title: const Text('Register')),
@@ -118,10 +117,10 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                   },
                 ),
                 const SizedBox(height: 30),
-                ElevatedButton(
-                  onPressed: isLoading ? null : _sendRegistrationEvent,
-                  child: isLoading ? const CircularProgressIndicator() : const Text('Register'),
-                ),
+                // ElevatedButton(
+                //   onPressed: isLoading ? null : _sendRegistrationEvent,
+                //   child: isLoading ? const CircularProgressIndicator() : const Text('Register'),
+                // ),
               ],
             ),
           ),

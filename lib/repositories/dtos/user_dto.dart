@@ -1,8 +1,8 @@
 import 'package:bricklayer/core/utils/guid.dart';
 
 class UserDto {
-  final Guid userId;
+  final Guid id;
   final String username;
 
-  UserDto({required this.userId, required this.username});
+  UserDto({required this.id, required this.username});
 }
