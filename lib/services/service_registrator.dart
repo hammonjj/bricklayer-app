@@ -1,6 +1,7 @@
 import 'package:bricklayer/env.dart';
 import 'package:bricklayer/repositories/auth_repository.dart';
 import 'package:bricklayer/repositories/user_repository.dart';
+import 'package:bricklayer/repositories/user_set_repository.dart';
 import 'package:get_it/get_it.dart';
 
 import 'api_client.dart';
@@ -20,4 +21,5 @@ Future<void> registerServices() async {
           userRepository: getIt.get<UserRepository>(),
           appSettings: getIt.get<AppSettings>()),
       dispose: (repo) => repo.dispose());
+  getIt.registerSingleton<UserSetRepository>(UserSetRepository(apiClient: getIt.get<ApiClient>()));
 }
