@@ -13,8 +13,9 @@ class UserSetRepository {
   Future<List<UserSetDto>> getUserSets() async {
     try {
       final response = await _apiClient.get('/userSets', true);
+      final data = response.data as List<dynamic>?;
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 && data != null && data.isNotEmpty) {
         final userSetModels = response.data.map((userSet) => UserSetModel.fromJson(userSet));
         return userSetModels.map((userSetModel) => UserSetDto.fromUserSetModel(userSetModel)).toList();
       } else {

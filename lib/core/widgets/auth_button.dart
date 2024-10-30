@@ -5,8 +5,9 @@ import 'package:formz/formz.dart';
 
 class AuthButton extends StatelessWidget {
   final bool isLoginMode;
+  final bool rememberMe;
 
-  const AuthButton({super.key, required this.isLoginMode});
+  const AuthButton({super.key, required this.isLoginMode, required this.rememberMe});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class AuthButton extends StatelessWidget {
       onPressed: isValid
           ? () {
               context.read<LoginBloc>().add(
-                    isLoginMode ? const LoginSubmitted() : const RegistrationSubmitted(),
+                    isLoginMode ? LoginSubmitted(rememberMe: rememberMe) : const RegistrationSubmitted(),
                   );
             }
           : null,

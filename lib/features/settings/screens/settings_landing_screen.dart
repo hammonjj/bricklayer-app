@@ -7,18 +7,18 @@ class SettingsLandingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final isDarkMode = themeProvider.themeMode == ThemeMode.dark;
+    final isDarkMode = true;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
+      appBar: AppBar(
+        title: const Text('Settings'),
+        automaticallyImplyLeading: true,
+      ),
       body: Center(
         child: SwitchListTile(
           title: const Text('Dark Mode'),
           value: isDarkMode,
-          onChanged: (value) {
-            themeProvider.toggleTheme(value);
-          },
+          onChanged: (value) {},
         ),
       ),
     );

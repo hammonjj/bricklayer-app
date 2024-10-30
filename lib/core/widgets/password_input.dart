@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PasswordInput extends StatelessWidget {
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController controller;
 
-  PasswordInput({super.key});
+  const PasswordInput({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

@@ -54,6 +54,7 @@ class BricklayerState extends State<Bricklayer> {
             return BlocProvider(
               create: (_) => LoginBloc(
                 authenticationRepository: GetIt.instance.get<AuthRepository>(),
+                appSettings: appSettings,
               ),
               child: const AuthScreen(),
             );

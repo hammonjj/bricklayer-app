@@ -26,7 +26,12 @@ final class LoginPasswordChanged extends LoginEvent {
 }
 
 final class LoginSubmitted extends LoginEvent {
-  const LoginSubmitted();
+  final bool rememberMe;
+
+  const LoginSubmitted({required this.rememberMe});
+
+  @override
+  List<Object> get props => [rememberMe];
 }
 
 class RegistrationSubmitted extends LoginEvent {

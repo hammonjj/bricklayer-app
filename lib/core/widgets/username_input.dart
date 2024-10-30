@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UsernameInput extends StatelessWidget {
-  final TextEditingController controller = TextEditingController();
+  final TextEditingController controller;
 
-  UsernameInput({super.key});
+  const UsernameInput({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
