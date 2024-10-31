@@ -13,7 +13,8 @@ class UserSetModel with _$UserSetModel {
       String? brand,
       String? setUrl,
       String? imageUrl,
-      String? instructionsUrl}) = _UserSetModel;
+      String? instructionsUrl,
+      int? pieces}) = _UserSetModel;
 
   factory UserSetModel.fromJson(Map<String, dynamic> json) => _$UserSetModelFromJson(json);
 }

@@ -63,7 +63,7 @@ class AuthRepository {
       if (response.statusCode == 200) {
         final user = UserLoginModel.fromJson(response.data);
 
-        await _setTokens(user.accessToken, user.refreshToken);
+        await _setTokens(user.accessToken, '');
         await _userRepository.setCurrentUser(UserDto(id: Guid.parse(user.userId), username: user.username));
         _controller.add(AuthenticationStatus.authenticated);
       } else {

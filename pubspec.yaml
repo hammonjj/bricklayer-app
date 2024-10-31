@@ -45,6 +45,7 @@ dependencies:
   uuid: ^4.5.1
   formz: ^0.7.0
   equatable: ^2.0.5
+  gap: ^3.0.1
 
 dev_dependencies:
   flutter_test:

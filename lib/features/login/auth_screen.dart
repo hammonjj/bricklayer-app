@@ -6,6 +6,7 @@ import 'package:bricklayer/services/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
@@ -79,35 +80,41 @@ class AuthScreenState extends State<AuthScreen> {
             context.go('/home');
           }
         },
-        child: Align(
-          alignment: const Alignment(0, -1 / 3),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const FlutterLogo(size: 150),
-              const SizedBox(height: 24),
-              UsernameInput(controller: _usernameController),
-              const SizedBox(height: 16),
-              PasswordInput(controller: _passwordController),
-              if (!_isLoginMode) ...[
-                const SizedBox(height: 16),
-                _ConfirmPasswordInput(),
-              ],
-              Row(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 350),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Checkbox(
-                    value: _rememberMe,
-                    onChanged: _toggleRememberMe,
+                  const FlutterLogo(size: 150),
+                  const Gap(24),
+                  UsernameInput(controller: _usernameController),
+                  const Gap(16),
+                  PasswordInput(controller: _passwordController),
+                  if (!_isLoginMode) ...[
+                    const Gap(16),
+                    _ConfirmPasswordInput(),
+                  ],
+                  const Gap(8),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: _rememberMe,
+                        onChanged: _toggleRememberMe,
+                      ),
+                      const Text('Remember Me'),
+                    ],
                   ),
-                  const Text('Remember Me'),
+                  const Gap(24),
+                  AuthButton(
+                    isLoginMode: _isLoginMode,
+                    rememberMe: _rememberMe,
+                  ),
                 ],
               ),
-              const SizedBox(height: 24),
-              AuthButton(
-                isLoginMode: _isLoginMode,
-                rememberMe: _rememberMe,
-              ),
-            ],
+            ),
           ),
         ),
       ),

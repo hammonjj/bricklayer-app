@@ -4,10 +4,12 @@ import 'package:uuid/uuid_value.dart';
 class UserSetDto {
   final UuidValue id;
 
+  final bool currentlyBuilt;
+  final int? pieces;
   final String? setId;
   final String? brand;
   final String name;
-  final bool currentlyBuilt;
+
   final String? setUrl;
   final String? imageUrl;
   final String? instructionsUrl;
@@ -20,7 +22,8 @@ class UserSetDto {
       this.brand,
       this.setUrl,
       this.imageUrl,
-      this.instructionsUrl});
+      this.instructionsUrl,
+      this.pieces});
 
   factory UserSetDto.fromUserSetModel(UserSetModel userSetModel) {
     return UserSetDto(
@@ -31,6 +34,7 @@ class UserSetDto {
         brand: userSetModel.brand,
         setUrl: userSetModel.setUrl,
         imageUrl: userSetModel.imageUrl,
-        instructionsUrl: userSetModel.instructionsUrl);
+        instructionsUrl: userSetModel.instructionsUrl,
+        pieces: userSetModel.pieces);
   }
 }

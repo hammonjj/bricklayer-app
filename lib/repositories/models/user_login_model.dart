@@ -9,7 +9,6 @@ part 'user_login_model.g.dart';
 class UserLoginModel with _$UserLoginModel {
   const factory UserLoginModel({
     required String accessToken,
-    required String refreshToken,
     required String userId,
     required String username,
   }) = _UserLoginModel;

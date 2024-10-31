@@ -2,6 +2,7 @@ import 'package:bricklayer/repositories/dtos/user_set_dto.dart';
 import 'package:bricklayer/repositories/user_set_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -16,22 +17,46 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeEvent>((event, emit) async {
       if (event is _FetchUserSets) {
         await _onFetchUserSets(emit);
+      } else if (event is _AddUserSet) {
+        await _onAddUserSet(event, emit);
+      } else if (event is _DeleteUserSet) {
+        await deleteUserSet(event.id, emit);
       }
     });
   }
 
   Future<void> _onFetchUserSets(Emitter<HomeState> emit) async {
-    emit(HomeState.loading()); // Emit loading state
+    emit(HomeState.loading());
 
     try {
-      // Fetch the user sets
       final userSets = await _userSetRepository.getUserSets();
-
-      // Emit the loaded state with fetched data
       emit(HomeState.loaded(userSets));
     } catch (e) {
-      // Emit an error state in case of failure
       emit(HomeState.error('Failed to fetch user sets'));
+    }
+  }
+
+  Future<void> _onAddUserSet(_AddUserSet event, Emitter<HomeState> emit) async {
+    try {
+      await _userSetRepository.addUserSet(
+        name: event.name,
+        setId: event.setId,
+        brand: event.brand,
+        isCurrentlyBuilt: event.isCurrentlyBuilt,
+      );
+
+      add(const HomeEvent.fetchUserSets());
+    } catch (e) {
+      emit(HomeState.error('Failed to add user set'));
+    }
+  }
+
+  Future<void> deleteUserSet(UuidValue id, Emitter<HomeState> emit) async {
+    try {
+      await _userSetRepository.deleteUserSet(id);
+      add(const HomeEvent.fetchUserSets());
+    } catch (e) {
+      emit(HomeState.error('Failed to delete user set'));
     }
   }
 }

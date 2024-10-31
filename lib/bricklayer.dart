@@ -90,6 +90,7 @@ class BricklayerState extends State<Bricklayer> {
           userRepository: GetIt.instance.get<UserRepository>(),
         )..add(AuthSubscriptionRequested()),
         child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           routerConfig: _router,
           title: 'BrickLayer',
           theme: AppTheme.lightTheme,
