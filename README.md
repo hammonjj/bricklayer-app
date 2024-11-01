@@ -14,3 +14,19 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Random Reminders
+Global
+ - Change name in application title (MacOS)
+ - Remove white border from app icon
+SetsScreen
+ - Sizing in general is wonky
+ - Image loader shows outside of card
+SetDetailsPage
+ - Add the set parts list
+ - Back button is broken
+CachedNetworkImage
+- Add actual image caching so I'm not a liar
+PartsScreen
+- Add reactive search bar
+- Add filtering options

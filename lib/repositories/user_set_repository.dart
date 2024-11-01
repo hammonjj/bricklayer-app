@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bricklayer/repositories/dtos/user_set_dto.dart';
 import 'package:bricklayer/repositories/models/user_set_model.dart';
+import 'package:collection/collection.dart';
 import 'package:uuid/uuid.dart';
 
 import '../services/api_client.dart';
@@ -31,6 +32,30 @@ class UserSetRepository {
       } else {
         _userSets = [];
         return _userSets!;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<UserSetDto> getUserSetById(UuidValue id) async {
+    final userSet = _userSets?.firstWhereOrNull((userSet) => userSet.id == id);
+    if (userSet != null) {
+      return userSet;
+    }
+
+    try {
+      final response = await _apiClient.get('/userSets/${id.toString()}', true);
+
+      if (response.statusCode == 200) {
+        final userSetModel = UserSetModel.fromJson(response.data);
+        final userSetDto = UserSetDto.fromUserSetModel(userSetModel);
+
+        _userSets ??= [];
+        _userSets?.add(userSetDto);
+        return userSetDto;
+      } else {
+        throw Exception(response.data['error'] ?? 'Failed to fetch user set');
       }
     } catch (e) {
       rethrow;

@@ -77,7 +77,7 @@ class AuthScreenState extends State<AuthScreen> {
                 const SnackBar(content: Text('Authentication Failure')),
               );
           } else if (state.status.isSuccess) {
-            context.go('/home');
+            context.go('/sets');
           }
         },
         child: Center(

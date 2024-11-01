@@ -1,19 +1,20 @@
-import 'package:bricklayer/features/home/bloc/home_bloc.dart';
+import 'package:bricklayer/core/widgets/cached_network_image.dart';
+import 'package:bricklayer/features/sets/bloc/sets_bloc.dart';
 import 'package:bricklayer/repositories/dtos/user_set_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-class SetCard extends StatefulWidget {
+class SetListViewCard extends StatefulWidget {
   final UserSetDto _legoSet;
 
-  const SetCard(UserSetDto legoSet, {super.key}) : _legoSet = legoSet;
+  const SetListViewCard(UserSetDto legoSet, {super.key}) : _legoSet = legoSet;
 
   @override
-  SetCardState createState() => SetCardState();
+  SetListViewCardState createState() => SetListViewCardState();
 }
 
-class SetCardState extends State<SetCard> {
+class SetListViewCardState extends State<SetListViewCard> {
   bool _isHovered = false;
 
   @override
@@ -59,8 +60,8 @@ class SetCardState extends State<SetCard> {
                 ],
               ),
               const Spacer(),
-              Image.network(
-                widget._legoSet.imageUrl ?? '',
+              CachedNetworkImage(
+                imageUrl: widget._legoSet.imageUrl ?? '',
                 width: 100,
               ),
               Column(
@@ -72,7 +73,7 @@ class SetCardState extends State<SetCard> {
                   IconButton(
                     icon: const Icon(Icons.delete),
                     onPressed: () {
-                      context.read<HomeBloc>().add(HomeEvent.deleteUserSet(widget._legoSet.id));
+                      context.read<SetsBloc>().add(SetsEvent.deleteUserSet(widget._legoSet.id));
                     },
                   ),
                 ],

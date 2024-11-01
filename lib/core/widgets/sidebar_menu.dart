@@ -19,20 +19,6 @@ class SidebarMenu extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          // const SizedBox(
-          //     height: 64.0,
-          //     child: DrawerHeader(
-          //       margin: EdgeInsets.zero,
-          //       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          //       decoration: BoxDecoration(color: Colors.black),
-          //       child: Align(
-          //         alignment: Alignment.centerLeft,
-          //         child: Text(
-          //           'Navigation',
-          //           style: TextStyle(color: Colors.white, fontSize: 24),
-          //         ),
-          //       ),
-          //     )),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Text(
@@ -46,7 +32,7 @@ class SidebarMenu extends StatelessWidget {
               children: [
                 ListTile(
                   title: const Text('Sets'),
-                  onTap: () => context.go('/home'),
+                  onTap: () => context.go('/sets'),
                 ),
                 ListTile(
                   title: const Text('Mocs'),
@@ -75,12 +61,12 @@ class SidebarMenu extends StatelessWidget {
             child: Column(
               children: [
                 ListTile(
-                  title: const Text('Profile'),
-                  onTap: () => context.go('/profile'),
+                  title: const Text('Preferences'),
+                  onTap: () => context.go('/settings'),
                 ),
                 ListTile(
-                  title: const Text('Preferences'),
-                  onTap: () => context.go('/preferences'),
+                  title: const Text('Profile'),
+                  onTap: () => context.go('/profile'),
                 ),
                 ListTile(
                   title: const Text('Log Out'),

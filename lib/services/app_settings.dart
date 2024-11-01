@@ -1,3 +1,4 @@
+import 'package:bricklayer/blocs/view_mode_cubit.dart';
 import 'package:bricklayer/core/utils/guid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,6 +13,8 @@ class AppSettings {
   static const _usernameKey = 'user.username';
   static const _passwordKey = 'user.password';
   static const _rememberMeKey = 'user.rememberMe';
+
+  static const _viewModeKey = 'viewMode';
 
   final SharedPreferencesWithCache _prefs;
 
@@ -99,5 +102,13 @@ class AppSettings {
 
   Future<void> clearRememberMe() async {
     await _prefs.remove(_rememberMeKey);
+  }
+
+  ViewMode getViewMode() {
+    return _prefs.getString(_viewModeKey) == 'grid' ? ViewMode.grid : ViewMode.list;
+  }
+
+  Future<void> setViewMode(ViewMode mode) async {
+    await _prefs.setString(_viewModeKey, mode == ViewMode.list ? 'list' : 'grid');
   }
 }

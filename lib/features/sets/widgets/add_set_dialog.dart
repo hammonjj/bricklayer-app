@@ -1,4 +1,4 @@
-import 'package:bricklayer/features/home/bloc/home_bloc.dart';
+import 'package:bricklayer/features/sets/bloc/sets_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -59,8 +59,8 @@ class AddSetDialogState extends State<AddSetDialog> {
         ),
         TextButton(
           onPressed: () {
-            context.read<HomeBloc>().add(
-                  HomeEvent.addUserSet(
+            context.read<SetsBloc>().add(
+                  SetsEvent.addUserSet(
                     name: _nameController.text,
                     setId: _setIdController.text.isNotEmpty ? _setIdController.text : null,
                     brand: _selectedBrand,
