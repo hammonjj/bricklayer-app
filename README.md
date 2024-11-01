@@ -25,8 +25,6 @@ SetsScreen
 SetDetailsPage
  - Add the set parts list
  - Back button is broken
-CachedNetworkImage
-- Add actual image caching so I'm not a liar
 PartsScreen
 - Add reactive search bar
 - Add filtering options

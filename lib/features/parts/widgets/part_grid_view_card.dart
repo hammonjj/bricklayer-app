@@ -1,4 +1,4 @@
-import 'package:bricklayer/core/widgets/cached_network_image.dart';
+import 'package:bricklayer/core/widgets/cacheable_network_image.dart';
 import 'package:bricklayer/repositories/dtos/user_part_dto.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class PartGridViewCard extends StatelessWidget {
         children: [
           AspectRatio(
             aspectRatio: 1.5,
-            child: CachedNetworkImage(
+            child: CacheableNetworkImage(
               imageUrl: userPart.imageUrl!,
             ),
           ),

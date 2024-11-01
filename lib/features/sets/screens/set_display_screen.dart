@@ -1,5 +1,5 @@
 import 'package:bricklayer/core/utils/show_snack_bar_message.dart';
-import 'package:bricklayer/core/widgets/cached_network_image.dart';
+import 'package:bricklayer/core/widgets/cacheable_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
@@ -44,7 +44,7 @@ class SetDisplayScreenState extends State<SetDisplayScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (userSet.imageUrl != null)
-                    CachedNetworkImage(
+                    CacheableNetworkImage(
                       imageUrl: userSet.imageUrl ?? '',
                       height: 400,
                       width: 400,

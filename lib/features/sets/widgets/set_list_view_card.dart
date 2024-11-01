@@ -60,7 +60,7 @@ class SetListViewCardState extends State<SetListViewCard> {
                 ],
               ),
               const Spacer(),
-              CachedNetworkImage(
+              CacheableNetworkImage(
                 imageUrl: widget._legoSet.imageUrl ?? '',
                 width: 100,
               ),

@@ -1,4 +1,4 @@
-import 'package:bricklayer/core/widgets/cached_network_image.dart';
+import 'package:bricklayer/core/widgets/cacheable_network_image.dart';
 import 'package:bricklayer/features/sets/bloc/sets_bloc.dart';
 import 'package:bricklayer/repositories/dtos/user_set_dto.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +29,7 @@ class _SetGridViewCardState extends State<SetGridViewCard> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
-            CachedNetworkImage(
+            CacheableNetworkImage(
               imageUrl: widget.legoSet.imageUrl ?? '',
               height: 100,
             ),
