@@ -3,6 +3,7 @@ import 'package:bricklayer/features/sets/bloc/sets_bloc.dart';
 import 'package:bricklayer/repositories/dtos/user_set_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 class SetGridViewCard extends StatefulWidget {
   final UserSetDto legoSet;
@@ -33,7 +34,7 @@ class _SetGridViewCardState extends State<SetGridViewCard> {
               imageUrl: widget.legoSet.imageUrl ?? '',
               height: 100,
             ),
-            const SizedBox(height: 8),
+            const Gap(8),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(
@@ -46,7 +47,7 @@ class _SetGridViewCardState extends State<SetGridViewCard> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 4),
+                  const Gap(4),
                   Text(
                     widget.legoSet.brand ?? 'No brand',
                     style: const TextStyle(fontSize: 14, color: Colors.grey),
@@ -57,7 +58,7 @@ class _SetGridViewCardState extends State<SetGridViewCard> {
                     widget.legoSet.pieces != null ? '${widget.legoSet.pieces} pieces' : 'No piece count',
                     style: const TextStyle(fontSize: 12, color: Colors.grey),
                   ),
-                  const SizedBox(height: 8),
+                  const Gap(8),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Chip(
@@ -79,7 +80,7 @@ class _SetGridViewCardState extends State<SetGridViewCard> {
                 ],
               ),
             ),
-            const SizedBox(height: 8),
+            const Gap(8),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

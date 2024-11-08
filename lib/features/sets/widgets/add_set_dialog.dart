@@ -1,6 +1,8 @@
 import 'package:bricklayer/features/sets/bloc/sets_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class AddSetDialog extends StatefulWidget {
   const AddSetDialog({super.key});
@@ -13,8 +15,9 @@ class AddSetDialogState extends State<AddSetDialog> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _setIdController = TextEditingController();
 
-  String? _selectedBrand;
+  String? _selectedBrand = 'Lego';
   bool _isCurrentlyBuilt = false;
+  bool _showAdditionalFields = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,37 +27,45 @@ class AddSetDialogState extends State<AddSetDialog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Name'),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _setIdController,
-              decoration: const InputDecoration(labelText: 'Set ID (optional)'),
-            ),
-            const SizedBox(height: 16),
             DropdownButtonFormField<String?>(
               value: _selectedBrand,
               items: const [
                 DropdownMenuItem(value: null, child: Text('No brand')),
                 DropdownMenuItem(value: 'Lego', child: Text('Lego')),
               ],
-              onChanged: (value) => setState(() => _selectedBrand = value),
+              onChanged: (value) {
+                setState(() {
+                  _selectedBrand = value;
+                  _showAdditionalFields = value != 'Lego';
+                });
+              },
               decoration: const InputDecoration(labelText: 'Brand'),
             ),
-            const SizedBox(height: 8),
+            const Gap(16),
+            TextField(
+              controller: _setIdController,
+              decoration: const InputDecoration(labelText: 'Set ID (optional)'),
+            ),
+            const Gap(8),
             SwitchListTile(
               title: const Text('Currently Built'),
               value: _isCurrentlyBuilt,
               onChanged: (value) => setState(() => _isCurrentlyBuilt = value),
             ),
+            const Gap(8),
+            if (_showAdditionalFields) ...[
+              TextField(
+                controller: _nameController,
+                decoration: const InputDecoration(labelText: 'Name'),
+              ),
+              const Gap(16),
+            ],
           ],
         ),
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => GoRouter.of(context).pop(),
           child: const Text('Cancel'),
         ),
         TextButton(
@@ -67,7 +78,7 @@ class AddSetDialogState extends State<AddSetDialog> {
                     isCurrentlyBuilt: _isCurrentlyBuilt,
                   ),
                 );
-            Navigator.of(context).pop();
+            GoRouter.of(context).pop();
           },
           child: const Text('Add'),
         ),

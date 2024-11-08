@@ -2,6 +2,7 @@ import 'package:bricklayer/core/utils/show_snack_bar_message.dart';
 import 'package:bricklayer/core/widgets/cacheable_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:uuid/uuid.dart';
 
 import '../bloc/sets_bloc.dart';
@@ -49,7 +50,7 @@ class SetDisplayScreenState extends State<SetDisplayScreen> {
                       height: 400,
                       width: 400,
                     ),
-                  const SizedBox(height: 10),
+                  const Gap(10),
                   Text(
                     'Name: ${userSet.name}',
                     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -57,7 +58,7 @@ class SetDisplayScreenState extends State<SetDisplayScreen> {
                   Text('Brand: ${userSet.brand ?? "N/A"}'),
                   Text('Pieces: ${userSet.pieces?.toString() ?? "N/A"}'),
                   Text('Currently Built: ${userSet.currentlyBuilt ? "Yes" : "No"}'),
-                  const SizedBox(height: 10),
+                  const Gap(10),
                   if (userSet.instructionsUrl != null)
                     ElevatedButton(
                       onPressed: () {
